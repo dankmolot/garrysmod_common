@@ -34,6 +34,8 @@ gmod::common # basic headers for working with lua (must have)
 gmod::lua_shared
 gmod::helpers
 gmod::helpers_extended
+
+gmod::scanning
 ```
 
 ## Helper functions
