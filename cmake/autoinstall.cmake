@@ -1,0 +1,5 @@
+function(autoinstall TARGET DIRECTORY)
+    set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${DIRECTORY})
+    set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${DIRECTORY})
+    set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${DIRECTORY})
+endfunction()

@@ -2,6 +2,48 @@
 
 A repository of common bits for compilation projects based on Garry's Mod.
 
+# Usage with CMake
+Define this function somewhere in your cmake project:
+```cmake
+function(find_garrysmod_common)
+    message(STATUS "Looking for garrysmod_common...")
+    set(GARRYSMOD_COMMON_PATH "GARRYSMOD_COMMON_NOT_FOUND" CACHE PATH "Path to garrysmod_common (https://github.com/dankmolot/garrysmod_common/tree/master-cmake)")
+
+    if(NOT IS_DIRECTORY ${GARRYSMOD_COMMON_PATH} OR NOT EXISTS ${GARRYSMOD_COMMON_PATH}/CMakeLists.txt OR ${GARRYSMOD_COMMON_PATH} STREQUAL ${CMAKE_CURRENT_LIST_DIR})
+        message(FATAL_ERROR "Invalid path to garrysmod_common. Please set valid GARRYSMOD_COMMON_PATH")
+    endif()
+
+    add_subdirectory(${GARRYSMOD_COMMON_PATH} ${CMAKE_BINARY_DIR}/garrysmod_common SYSTEM)
+endfunction()
+```
+And then include garrysmod_common just by calling `find_garrysmod_common` function:
+```cmake
+# this function will throw an error if garrysmod_common wasn't found
+find_garrysmod_common()
+if(NOT GARRYSMOD_COMMON_FOUND) # Check if garrysmod_common has been found
+    message(FATAL_ERROR "garrysmod_common not found")
+endif()
+
+# define your project below
+project(...)
+```
+
+## Libraries (targets)
+```cmake
+gmod::common # basic headers for working with lua (must have)
+gmod::lua_shared
+gmod::helpers
+gmod::helpers_extended
+```
+
+## Helper functions
+```cmake
+set_gmod_suffix_prefix(TARGET) # sets prefix and suffix for a library (mylib.dll -> gmsv_mylib_win32.dll)
+autoinstall(TARGET DIRECTORY) # automatically outputs build to specified directory for target
+```
+
+# Usage with premake
+
 The `include` directory has all the required headers for building modules for Garry's Mod (LuaJIT and Garry's Mod headers) with C++.
 
 There's common code for premake on the `premake` directory for faster development. premake5 is required to generate projects.
