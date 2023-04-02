@@ -36,6 +36,7 @@ gmod::helpers
 gmod::helpers_extended
 
 gmod::scanning
+gmod::detouring
 ```
 
 ## Helper functions
