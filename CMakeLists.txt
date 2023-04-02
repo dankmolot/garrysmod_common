@@ -8,6 +8,7 @@ add_subdirectory(cmake)
 
 # find_sourcesdk()
 find_scanning()
+find_detouring()
 
 add_subdirectory(lua_shared)
 add_subdirectory(helpers)
