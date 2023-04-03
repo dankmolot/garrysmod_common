@@ -3,6 +3,8 @@
 A repository of common bits for compilation projects based on Garry's Mod.
 
 # Usage with CMake
+**WARNING:** Currently CMake build only supports serverside modules
+
 Define this function somewhere in your cmake project:
 ```cmake
 function(find_garrysmod_common)
@@ -33,10 +35,23 @@ project(...)
 gmod::common # basic headers for working with lua (must have)
 gmod::lua_shared
 gmod::helpers
-gmod::helpers_extended
+gmod::helpers_extended # gmod::scanning must be present
 
+# External libraries
 gmod::scanning
 gmod::detouring
+
+sourcesdk::common
+sourcesdk::tier0
+sourcesdk::tier1
+sourcesdk::tier2
+sourcesdk::tier3
+sourcesdk::utils
+sourcesdk::lzma
+sourcesdk::mathlib
+sourcesdk::raytrace
+sourcesdk::bitmap
+sourcesdk::vtf
 ```
 
 ## Helper functions
