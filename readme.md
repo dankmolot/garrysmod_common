@@ -44,14 +44,15 @@ gmod::detouring
 sourcesdk::common
 sourcesdk::tier0
 sourcesdk::tier1
-sourcesdk::tier2
-sourcesdk::tier3
+sourcesdk::tier2 # x86 only
+sourcesdk::tier3 # x86 only
 sourcesdk::utils
 sourcesdk::lzma
 sourcesdk::mathlib
 sourcesdk::raytrace
 sourcesdk::bitmap
 sourcesdk::vtf
+sourcesdk::interfaces # only supported on x86-64 branch
 ```
 
 ## Helper functions
