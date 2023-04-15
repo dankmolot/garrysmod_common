@@ -15,7 +15,7 @@ function(find_garrysmod_common)
         message(FATAL_ERROR "Invalid path to garrysmod_common. Please set valid GARRYSMOD_COMMON_PATH")
     endif()
 
-    add_subdirectory(${GARRYSMOD_COMMON_PATH} ${CMAKE_BINARY_DIR}/garrysmod_common SYSTEM)
+    add_subdirectory(${GARRYSMOD_COMMON_PATH} ${CMAKE_BINARY_DIR}/garrysmod_common)
 endfunction()
 ```
 And then include garrysmod_common just by calling `find_garrysmod_common` function:
