@@ -1,12 +1,12 @@
 [submodule "detouring"]
 	path = detouring
-	url = https://github.com/danielga/detouring.git
+	url = https://github.com/dankmolot/detouring.git
 [submodule "scanning"]
 	path = scanning
-	url = https://github.com/danielga/scanning.git
+	url = https://github.com/dankmolot/scanning.git
 [submodule "sourcesdk-minimal"]
 	path = sourcesdk-minimal
-	url = https://github.com/danielga/sourcesdk-minimal.git
+	url = https://github.com/dankmolot/sourcesdk-minimal.git
 [submodule "premake/premake-export-compile-commands"]
 	path = premake/premake-export-compile-commands
 url=https://github.com/danielga/premake-export-compile-commands.git
