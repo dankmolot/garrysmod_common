@@ -18,7 +18,7 @@ add_subdirectory(helpers_extended)
 add_library(garrysmod_common INTERFACE EXCLUDE_FROM_ALL)
 add_library(gmod::common ALIAS garrysmod_common)
 
-target_include_directories(garrysmod_common INTERFACE include)
+target_include_directories(garrysmod_common SYSTEM INTERFACE include)
 
 # Let everyone know that garrysmod_common was included
 set(GARRYSMOD_COMMON_FOUND TRUE CACHE INTERNAL "GARRYSMOD_COMMON_FOUND")
