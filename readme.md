@@ -3,8 +3,6 @@
 A repository of common bits for compilation projects based on Garry's Mod.
 
 # Usage with CMake
-**WARNING:** Currently CMake build only supports serverside modules
-
 Define this function somewhere in your cmake project:
 ```cmake
 function(find_garrysmod_common)
@@ -60,6 +58,12 @@ sourcesdk::interfaces # only supported on x86-64 branch
 set_gmod_suffix_prefix(TARGET) # sets prefix and suffix for a library (mylib.dll -> gmsv_mylib_win32.dll)
 autoinstall(TARGET DIRECTORY) # automatically outputs build to specified directory for target
 ```
+
+## Options
+| Option | Description | Default Value |
+|------|---------|---|
+| `GARRYSMOD_COMMON_PATH` | Path to garrysmod_common| `GARRYSMOD_COMMON_NOT_FOUND` |
+| `CLIENT_DLL` | Builds client dll instead of server | `OFF` |
 
 # Usage with premake
 

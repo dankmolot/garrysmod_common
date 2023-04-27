@@ -6,6 +6,8 @@ project(garrysmod_common)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+option(CLIENT_DLL "Build as client dll" OFF)
+
 add_subdirectory(cmake)
 
 find_sourcesdk()
@@ -19,9 +21,9 @@ add_subdirectory(helpers_extended)
 add_library(garrysmod_common INTERFACE EXCLUDE_FROM_ALL)
 add_library(gmod::common ALIAS garrysmod_common)
 
-target_compile_definitions(
+target_compile_definitions(garrysmod_common INTERFACE
     GMMODULE
-    IS_SERVERSIDE=1 # TODO: Make support for client dll
+    IS_SERVERSIDE=$<NOT:$<BOOL:${CLIENT_DLL}>>
     GMOD_ALLOW_OLD_TYPES
     GMOD_ALLOW_LIGHTUSERDATA
 )

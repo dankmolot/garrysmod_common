@@ -1,7 +1,11 @@
 # https://github.com/Facepunch/gmod-module-base/blob/development/include/CMakeLists.txt
 
 function(set_gmod_suffix_prefix library)
-	SET_TARGET_PROPERTIES(${library} PROPERTIES PREFIX "gmsv_")
+    if(CLIENT_DLL)
+        SET_TARGET_PROPERTIES(${library} PROPERTIES PREFIX "gmcl_")
+    else()
+        SET_TARGET_PROPERTIES(${library} PROPERTIES PREFIX "gmsv_")
+    endif()
 
 	if(APPLE)
 		if("${CMAKE_SIZEOF_VOID_P}" STREQUAL "4")
