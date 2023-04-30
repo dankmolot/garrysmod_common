@@ -51,6 +51,7 @@ sourcesdk::raytrace
 sourcesdk::bitmap
 sourcesdk::vtf
 sourcesdk::interfaces # only supported on x86-64 branch
+sourcesdk::steam_api
 ```
 
 ## Helper functions
