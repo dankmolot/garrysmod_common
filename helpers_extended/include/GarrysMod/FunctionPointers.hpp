@@ -32,6 +32,7 @@ struct netsocket_t;
 class LuaFile;
 class CSteam3Server;
 struct lua_State;
+class IConnectionlessPacketHandler;
 
 namespace FunctionPointers
 {
@@ -50,6 +51,15 @@ CBaseClient_ConnectionStart_t CBaseClient_ConnectionStart( );
 
 typedef void ( GMCOMMON_CALLING_CONVENTION *CBaseClientState_ConnectionStart_t )( CBaseClientState *clientstate, INetChannel *netchan );
 CBaseClientState_ConnectionStart_t CBaseClientState_ConnectionStart( );
+
+typedef void ( GMCOMMON_CALLING_CONVENTION *CLC_CmdKeyValues_Constructor_t )( CBaseClientState *clientstate, void *keyvalues );
+CLC_CmdKeyValues_Constructor_t CLC_CmdKeyValues_Constructor( );
+
+typedef void ( GMCOMMON_CALLING_CONVENTION *SVC_CreateStringTable_Constructor_t )( CBaseClientState *clientstate );
+SVC_CreateStringTable_Constructor_t SVC_CreateStringTable_Constructor( );
+
+typedef void ( GMCOMMON_CALLING_CONVENTION *SVC_CmdKeyValues_Constructor_t )( CBaseClientState *clientstate, void *keyvalues );
+SVC_CmdKeyValues_Constructor_t SVC_CmdKeyValues_Constructor( );
 
 typedef void ( GMCOMMON_CALLING_CONVENTION *CBaseServer_RecalculateTags_t )( CBaseServer *server );
 CBaseServer_RecalculateTags_t CBaseServer_RecalculateTags( );
@@ -71,5 +81,8 @@ Steam3Server_t Steam3Server( );
 
 typedef int ( *AdvancedLuaErrorReporter_t )( lua_State *L );
 AdvancedLuaErrorReporter_t AdvancedLuaErrorReporter( );
+
+typedef void ( *NET_ProcessSocket_t )( int sock, IConnectionlessPacketHandler *handler );
+NET_ProcessSocket_t NET_ProcessSocket( );
 
 }

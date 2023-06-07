@@ -123,6 +123,54 @@ namespace FunctionPointers
 		return func_pointer;
 	}
 
+	CLC_CmdKeyValues_Constructor_t CLC_CmdKeyValues_Constructor( )
+	{
+		static CLC_CmdKeyValues_Constructor_t func_pointer = nullptr;
+		if( func_pointer == nullptr )
+		{
+			SourceSDK::FactoryLoader engine_loader( "engine" );
+			func_pointer = ResolveSymbols<CLC_CmdKeyValues_Constructor_t>(
+				engine_loader, Symbols::CLC_CmdKeyValues_Constructor
+			);
+		}
+
+		return func_pointer;
+	}
+
+	SVC_CreateStringTable_Constructor_t SVC_CreateStringTable_Constructor( )
+	{
+		static SVC_CreateStringTable_Constructor_t func_pointer = nullptr;
+		if( func_pointer == nullptr )
+		{
+			SourceSDK::FactoryLoader engine_loader( "engine" );
+			func_pointer = ResolveSymbols<SVC_CreateStringTable_Constructor_t>(
+				engine_loader, Symbols::SVC_CreateStringTable_Constructor,
+				reinterpret_cast<const uint8_t *>( CBaseClientState_ConnectionStart( ) ) + 16
+			);
+		}
+
+		return func_pointer;
+	}
+
+	SVC_CmdKeyValues_Constructor_t SVC_CmdKeyValues_Constructor( )
+	{
+		static SVC_CmdKeyValues_Constructor_t func_pointer = nullptr;
+		if( func_pointer == nullptr )
+		{
+			SourceSDK::FactoryLoader engine_loader( "engine" );
+			// we use a starting point for sigscan because SVC_CmdKeyValues::SVC_CmdKeyValues
+			// and CLC_CmdKeyValues::CLC_CmdKeyValues have the same signature
+			// this code expects CLC_CmdKeyValues::CLC_CmdKeyValues to appear before
+			// SVC_CmdKeyValues::SVC_CmdKeyValues
+			func_pointer = ResolveSymbols<SVC_CmdKeyValues_Constructor_t>(
+				engine_loader, Symbols::SVC_CmdKeyValues_Constructor,
+				reinterpret_cast<const uint8_t *>( CLC_CmdKeyValues_Constructor( ) ) + 16
+			);
+		}
+
+		return func_pointer;
+	}
+
 	CBaseServer_RecalculateTags_t CBaseServer_RecalculateTags( )
 	{
 		static CBaseServer_RecalculateTags_t func_pointer = nullptr;
@@ -249,6 +297,20 @@ namespace FunctionPointers
 			SourceSDK::FactoryLoader lua_shared_loader( "lua_shared" );
 			func_pointer = ResolveSymbols<AdvancedLuaErrorReporter_t>(
 				lua_shared_loader, Symbols::AdvancedLuaErrorReporter
+			);
+		}
+
+		return func_pointer;
+	}
+
+	NET_ProcessSocket_t NET_ProcessSocket( )
+	{
+		static NET_ProcessSocket_t func_pointer = nullptr;
+		if( func_pointer == nullptr )
+		{
+			SourceSDK::FactoryLoader lua_shared_loader( "engine" );
+			func_pointer = ResolveSymbols<NET_ProcessSocket_t>(
+				lua_shared_loader, Symbols::NET_ProcessSocket
 			);
 		}
 
