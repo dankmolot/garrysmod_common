@@ -35,6 +35,12 @@ namespace Symbols
 		Symbol::FromName( "?ConnectionStart@CBaseClientState@@UEAAXPEAVINetChannel@@@Z" )
 	};
 
+	const std::vector<Symbol> CLC_CmdKeyValues_Constructor = { };
+
+	const std::vector<Symbol> SVC_CreateStringTable_Constructor = { };
+
+	const std::vector<Symbol> SVC_CmdKeyValues_Constructor = { };
+
 	const std::vector<Symbol> CBaseServer_RecalculateTags = {
 		Symbol::FromName( "?RecalculateTags@CBaseServer@@QEAAXXZ" )
 	};
@@ -77,6 +83,8 @@ namespace Symbols
 
 	const std::vector<Symbol> AdvancedLuaErrorReporter = { Symbol::FromName( "?AdvancedLuaErrorReporter@@YAHPEAUlua_State@@@Z" ) };
 
+	const std::vector<Symbol> NET_ProcessSocket;
+
 #elif defined ARCHITECTURE_X86
 
 	const std::vector<Symbol> CBasePlayer_HandleClientLuaError = {
@@ -103,12 +111,24 @@ namespace Symbols
 
 	const std::vector<Symbol> CBaseClient_ConnectionStart = {
 		Symbol::FromName( "?ConnectionStart@CBaseClient@@UAEXPAVINetChannel@@@Z" ),
-		Symbol::FromSignature( "\x55\x8B\xEC\x51\x53\x56\x57\x8B\xD9\x6A" )
+		Symbol::FromSignature( "\x55\x8B\xEC\x53\x56\x57\x6A\x1C\x8B\xF1\x2A\x2A\x2A\x2A\x2A\x8B\xD0\x83\xC4\x04\x85\xD2\x2A\x2A\xC7" )
 	};
 
 	const std::vector<Symbol> CBaseClientState_ConnectionStart = {
 		Symbol::FromName( "?ConnectionStart@CBaseClientState@@UAEXPAVINetChannel@@@Z" ),
-		Symbol::FromSignature( "\x55\x8B\xEC\x83\xEC\x08\x53\x56\x57\x6A" )
+		Symbol::FromSignature( "\x55\x8B\xEC\x53\x56\x57\x6A\x1C\x8B\xF9\x2A\x2A\x2A\x2A\x2A\x8B\xC8\x83\xC4\x04\x85\xC9\x2A\x2A\xC7\x41\x08\x00" )
+	};
+
+	const std::vector<Symbol> CLC_CmdKeyValues_Constructor = {
+		Symbol::FromSignature( "\x55\x8B\xEC\x8B\x45\x2A\x89\x41\x2A\x8B\xC1\xC6\x41\x2A\x01\xC7\x41\x2A\x00\x00\x00\x00\xC7\x01\x2A\x2A\x2A\x2A\x5D\xC2\x04\x00" )
+	};
+
+	const std::vector<Symbol> SVC_CreateStringTable_Constructor = {
+		Symbol::FromSignature( "\x56\x8B\xF1\x8D\x4E\x2A\xC6\x46\x2A\x01" )
+	};
+
+	const std::vector<Symbol> SVC_CmdKeyValues_Constructor = {
+		Symbol::FromSignature( "\x55\x8B\xEC\x8B\x45\x2A\x89\x41\x2A\x8B\xC1\xC6\x41\x2A\x01\xC7\x41\x2A\x00\x00\x00\x00\xC7\x01\x2A\x2A\x2A\x2A\x5D\xC2\x04\x00" )
 	};
 
 	const std::vector<Symbol> CBaseServer_RecalculateTags = {
@@ -160,8 +180,10 @@ namespace Symbols
 
 	const std::vector<Symbol> AdvancedLuaErrorReporter = {
 		Symbol::FromName( "?AdvancedLuaErrorReporter@@YAHPAUlua_State@@@Z" ),
-		Symbol::FromSignature( "\x55\x8B\xEC\x8B\x0D\x2A\x2A\x2A\x2A\x83\xEC\x4C" )
+		Symbol::FromSignature( "\x55\x8B\xEC\x83\xEC\x5C" )
 	};
+
+	const std::vector<Symbol> NET_ProcessSocket = { Symbol::FromSignature( "\x55\x8B\xEC\x83\xEC\x08\x8B\x0D\x2A\x2A\x2A\x2A\x8B\x81" ) };
 
 #endif
 
@@ -230,6 +252,39 @@ namespace Symbols
 #if defined ARCHITECTURE_X86
 
 		Symbol::FromSignature( "\x55\x89\xE5\x57\x56\x53\x83\xEC\x1C\x8B" )
+
+#endif
+
+	};
+
+	const std::vector<Symbol> CLC_CmdKeyValues_Constructor = {
+		Symbol::FromName( "_ZN16CLC_CmdKeyValuesC1EP9KeyValues" ),
+
+#if defined ARCHITECTURE_X86
+
+		Symbol::FromSignature( "\x55\x89\xE5\x8B\x45\x2A\x8B\x55\x2A\xC6\x40\x2A\x01\xC7\x40\x2A\x00\x00\x00\x00\x89\x50\x2A\xC7\x00\x2A\x2A\x2A\x2A\x5D\xC3" )
+
+#endif
+
+	};
+
+	const std::vector<Symbol> SVC_CreateStringTable_Constructor = {
+		Symbol::FromName( "_ZN21SVC_CreateStringTableC1Ev" ),
+
+#if defined ARCHITECTURE_X86
+
+		Symbol::FromSignature( "\x55\x89\xE5\x53\x83\xEC\x14\x8B\x5D\x2A\x8D\x43\x2A\xC6\x43\x2A\x01" )
+
+#endif
+
+	};
+
+	const std::vector<Symbol> SVC_CmdKeyValues_Constructor = {
+		Symbol::FromName( "_ZN16SVC_CmdKeyValuesC1EP9KeyValues" ),
+
+#if defined ARCHITECTURE_X86
+
+		Symbol::FromSignature( "\x55\x89\xE5\x8B\x45\x2A\x8B\x55\x2A\xC6\x40\x2A\x01\xC7\x40\x2A\x00\x00\x00\x00\x89\x50\x2A\xC7\x00\x2A\x2A\x2A\x2A\x5D\xC3" )
 
 #endif
 
@@ -346,6 +401,8 @@ namespace Symbols
 
 	};
 
+	const std::vector<Symbol> NET_ProcessSocket = { Symbol::FromName( "_Z17NET_ProcessSocketiP28IConnectionlessPacketHandler" ) };
+
 #elif defined SYSTEM_MACOSX
 
 	const std::vector<Symbol> CBasePlayer_HandleClientLuaError = {
@@ -377,6 +434,18 @@ namespace Symbols
 
 	const std::vector<Symbol> CBaseClientState_ConnectionStart = {
 		Symbol::FromName( "_ZN16CBaseClientState15ConnectionStartEP11INetChannel" )
+	};
+
+	const std::vector<Symbol> CLC_CmdKeyValues_Constructor = {
+		Symbol::FromName( "_ZN16CLC_CmdKeyValuesC1EP9KeyValues" )
+	};
+
+	const std::vector<Symbol> SVC_CreateStringTable_Constructor = {
+		Symbol::FromName( "_ZN21SVC_CreateStringTableC1Ev" )
+	};
+
+	const std::vector<Symbol> SVC_CmdKeyValues_Constructor = {
+		Symbol::FromName( "_ZN16SVC_CmdKeyValuesC1EP9KeyValues" )
 	};
 
 	const std::vector<Symbol> CBaseServer_RecalculateTags = {
@@ -429,6 +498,8 @@ namespace Symbols
 	};
 
 	const std::vector<Symbol> AdvancedLuaErrorReporter = { Symbol::FromName( "_Z24AdvancedLuaErrorReporterP9lua_State" ) };
+
+	const std::vector<Symbol> NET_ProcessSocket = { Symbol::FromName( "_Z17NET_ProcessSocketiP28IConnectionlessPacketHandler" ) };
 
 #endif
 
