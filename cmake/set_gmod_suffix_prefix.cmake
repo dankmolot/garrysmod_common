@@ -29,9 +29,7 @@ function(set_gmod_suffix_prefix library)
 
 	if(WIN32)
 		# Also change output name for pdb files
-		get_target_property(NAME_PREFIX ${library} PREFIX)
-		get_target_property(NAME_INNER ${library} NAME)
-		get_target_property(NAME_SUFFIX ${library} SUFFIX)
-		set_target_properties(${library} PROPERTIES PDB_NAME "${NAME_PREFIX}${NAME_INNER}${NAME_SUFFIX}.pdb")
+		get_target_property(LIBRARY_NAME ${library} NAME)
+		set_target_properties(${library} PROPERTIES PDB_NAME "${LIBRARY_NAME}")
 	endif()
 endfunction()
