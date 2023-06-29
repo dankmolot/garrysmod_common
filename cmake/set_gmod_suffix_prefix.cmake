@@ -26,4 +26,12 @@ function(set_gmod_suffix_prefix library)
 			SET_TARGET_PROPERTIES(${library} PROPERTIES SUFFIX "_win64.dll")
 		endif()
 	endif()
+
+	if(WIN32)
+		# Also change output name for pdb files
+		get_target_property(NAME_PREFIX ${library} PREFIX)
+		get_target_property(NAME_INNER ${library} NAME)
+		get_target_property(NAME_SUFFIX ${library} SUFFIX)
+		set_target_properties(${library} PROPERTIES PDB_NAME "${NAME_PREFIX}${NAME_INNER}${NAME_SUFFIX}.pdb")
+	endif()
 endfunction()
