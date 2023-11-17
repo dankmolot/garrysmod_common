@@ -35,11 +35,17 @@ namespace Symbols
 		Symbol::FromName( "?ConnectionStart@CBaseClientState@@UEAAXPEAVINetChannel@@@Z" )
 	};
 
-	const std::vector<Symbol> CLC_CmdKeyValues_Constructor = { };
+	const std::vector<Symbol> CLC_CmdKeyValues_Constructor = {
+		Symbol::FromSignature( "\x48\x8D\x05\x2A\x2A\x2A\x2A\xC6\x41\x2A\x01\x48\x89\x01\x48\x8B\xC1" )
+	};
 
-	const std::vector<Symbol> SVC_CreateStringTable_Constructor = { };
+	const std::vector<Symbol> SVC_CreateStringTable_Constructor = {
+		Symbol::FromSignature( "\x40\x53\x48\x83\xEC\x20\x48\x8B\xD9\xC6\x41\x2A\x01\x33\xC9" )
+	};
 
-	const std::vector<Symbol> SVC_CmdKeyValues_Constructor = { };
+	const std::vector<Symbol> SVC_CmdKeyValues_Constructor = {
+		Symbol::FromSignature( "\x48\x8D\x05\x2A\x2A\x2A\x2A\xC6\x41\x2A\x01\x48\x89\x01\x48\x8B\xC1" )
+	};
 
 	const std::vector<Symbol> CBaseServer_RecalculateTags = {
 		Symbol::FromName( "?RecalculateTags@CBaseServer@@QEAAXXZ" )
@@ -84,6 +90,10 @@ namespace Symbols
 	const std::vector<Symbol> AdvancedLuaErrorReporter = { Symbol::FromName( "?AdvancedLuaErrorReporter@@YAHPEAUlua_State@@@Z" ) };
 
 	const std::vector<Symbol> NET_ProcessSocket;
+
+	const std::vector<Symbol> NET_CreateNetChannel = {
+		Symbol::FromSignature( "\x48\x89\x6C\x24\x2A\x48\x89\x7C\x24\x2A\x41\x54\x41\x56\x41\x57\x48\x83\xEC\x30\x80\x7C\x24\x2A\x00" )
+	};
 
 #elif defined ARCHITECTURE_X86
 
@@ -168,7 +178,7 @@ namespace Symbols
 
 	const std::vector<Symbol> GModDataPack_AddOrUpdateFile = {
 		Symbol::FromName( "?AddOrUpdateFile@GModDataPack@@QAEXPAULuaFile@@_N@Z" ),
-		Symbol::FromSignature( "\x55\x8B\xEC\x83\xEC\x28\x53\x8B\x5D\x08\x83\x7B\x18\x10\x56\x8D" )
+		Symbol::FromSignature( "\x55\x8B\xEC\x81\xEC\x80\x00\x00\x00\x53\x8B\xD9\x56\x8B\x75\x08\x57\x8B\x03\x89\x5D\xFC\x8D\x7E\x04" )
 	};
 
 	const Symbol Steam3Server =
@@ -184,6 +194,10 @@ namespace Symbols
 	};
 
 	const std::vector<Symbol> NET_ProcessSocket = { Symbol::FromSignature( "\x55\x8B\xEC\x83\xEC\x08\x8B\x0D\x2A\x2A\x2A\x2A\x8B\x81" ) };
+
+	const std::vector<Symbol> NET_CreateNetChannel = {
+		Symbol::FromSignature( "\x55\x8B\xEC\x80\x7D\x2A\x00\x53\x8B\x5D" )
+	};
 
 #endif
 
@@ -264,6 +278,10 @@ namespace Symbols
 
 		Symbol::FromSignature( "\x55\x89\xE5\x8B\x45\x2A\x8B\x55\x2A\xC6\x40\x2A\x01\xC7\x40\x2A\x00\x00\x00\x00\x89\x50\x2A\xC7\x00\x2A\x2A\x2A\x2A\x5D\xC3" )
 
+#elif defined ARCHITECTURE_X86_64
+
+		Symbol::FromSignature( "\x5D\xC3\x55\x48\x8D\x05\x2A\x2A\x2A\x2A\xC6\x47\x2A\x01\x48\x89\xE5\x48\xC7\x47\x2A\x00\x00\x00\x00\x48\x89\x77\x2A\x48\x89\x07\x5D\xC3", 2 )
+
 #endif
 
 	};
@@ -275,6 +293,10 @@ namespace Symbols
 
 		Symbol::FromSignature( "\x55\x89\xE5\x53\x83\xEC\x14\x8B\x5D\x2A\x8D\x43\x2A\xC6\x43\x2A\x01" )
 
+#elif defined ARCHITECTURE_X86_64
+
+		Symbol::FromSignature( "\x55\x48\x8D\x05\x2A\x2A\x2A\x2A\x48\x89\xE5\x53\x48\x89\xFB\x48\x8D\xBF\x2A\x2A\x2A\x2A\x48\x83\xEC\x08\xC6\x47\x2A\x01" )
+
 #endif
 
 	};
@@ -285,6 +307,10 @@ namespace Symbols
 #if defined ARCHITECTURE_X86
 
 		Symbol::FromSignature( "\x55\x89\xE5\x8B\x45\x2A\x8B\x55\x2A\xC6\x40\x2A\x01\xC7\x40\x2A\x00\x00\x00\x00\x89\x50\x2A\xC7\x00\x2A\x2A\x2A\x2A\x5D\xC3" )
+
+#elif defined ARCHITECTURE_X86_64
+
+		Symbol::FromSignature( "\x55\x48\x8D\x05\x2A\x2A\x2A\x2A\xC6\x47\x2A\x01\x48\x89\xE5\x48\xC7\x47\x2A\x00\x00\x00\x00\x48\x89\x77\x2A\x48\x89\x07\x5D\xC3" )
 
 #endif
 
@@ -371,7 +397,7 @@ namespace Symbols
 #elif defined ARCHITECTURE_X86_64
 
 	const Symbol Steam3Server =
-		Symbol::FromSignature( "\x55\x48\x8D\x05\x2A\x2A\x2A\x2A\x48\x89\xE5\x5D\xC3\x90\x66\x90\x55\x31\xC0\xB9\x09\x00\x00\x00\x48\x89\xE5\x41\x57\xBE" );
+		Symbol::FromSignature( "\x55\x48\x8D\x05\x2A\x2A\x2A\x2A\x48\x89\xE5\x5D\xC3\x90\x66\x90" );
 
 #endif
 
@@ -402,6 +428,25 @@ namespace Symbols
 	};
 
 	const std::vector<Symbol> NET_ProcessSocket = { Symbol::FromName( "_Z17NET_ProcessSocketiP28IConnectionlessPacketHandler" ) };
+
+	const std::vector<Symbol> NET_CreateNetChannel = {
+		Symbol::FromName( "_Z20NET_CreateNetChanneliP8netadr_sPKcP18INetChannelHandlerbi" ),
+
+#if defined ARCHITECTURE_X86_OLD
+
+		Symbol::FromSignature( "\x55\x89\xE5\x57\x56\x53\x83\xEC\x3C\xC7\x45\x2A\x00\x00\x00\x00\x80\x7D\x2A\x01" )
+
+#elif defined ARCHITECTURE_X86
+
+		Symbol::FromSignature( "\x55\x89\xE5\x57\x56\x53\x83\xEC\x2C\x80\x7D\x2A\x01" )
+
+#elif defined ARCHITECTURE_X86_64
+
+		Symbol::FromSignature( "\x55\x48\x89\xE5\x41\x57\x45\x89\xCF\x41\x56\x49\x89\xCE" )
+
+#endif
+
+	};
 
 #elif defined SYSTEM_MACOSX
 
@@ -500,6 +545,8 @@ namespace Symbols
 	const std::vector<Symbol> AdvancedLuaErrorReporter = { Symbol::FromName( "_Z24AdvancedLuaErrorReporterP9lua_State" ) };
 
 	const std::vector<Symbol> NET_ProcessSocket = { Symbol::FromName( "_Z17NET_ProcessSocketiP28IConnectionlessPacketHandler" ) };
+
+	const std::vector<Symbol> NET_CreateNetChannel;
 
 #endif
 
