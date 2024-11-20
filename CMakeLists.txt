@@ -1,18 +1,15 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(garrysmod_common)
-
-# garrysmod_common requires C++ 17 atleast
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 option(CLIENT_DLL "Build as client dll" OFF)
 
 add_subdirectory(cmake)
 
-find_sourcesdk()
-find_scanning()
-find_detouring()
+# let find_package find the modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+find_package(Scanning REQUIRED)
+find_package(Detouring REQUIRED)
+find_package(SourceSDK REQUIRED)
 
 add_subdirectory(lua_shared)
 add_subdirectory(helpers)
@@ -29,6 +26,3 @@ target_compile_definitions(garrysmod_common INTERFACE
 )
 
 target_include_directories(garrysmod_common SYSTEM INTERFACE include)
-
-# Let everyone know that garrysmod_common was included
-set(GARRYSMOD_COMMON_FOUND TRUE CACHE INTERNAL "GARRYSMOD_COMMON_FOUND")

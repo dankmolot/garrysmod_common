@@ -3,29 +3,25 @@
 A repository of common bits for compilation projects based on Garry's Mod.
 
 # Usage with CMake
-Define this function somewhere in your cmake project:
+Create a file `<your project>/cmake/FindGarrysmodCommon.cmake` and put this code inside:
 ```cmake
-function(find_garrysmod_common)
-    message(STATUS "Looking for garrysmod_common...")
-    set(GARRYSMOD_COMMON_PATH "GARRYSMOD_COMMON_NOT_FOUND" CACHE PATH "Path to garrysmod_common (https://github.com/dankmolot/garrysmod_common/tree/master-cmake)")
+message(STATUS "Looking for garrysmod_common...")
+set(GARRYSMOD_COMMON_PATH "GARRYSMOD_COMMON_NOT_FOUND" CACHE PATH "Path to garrysmod_common (https://github.com/dankmolot/garrysmod_common/tree/master-cmake)")
+cmake_path(ABSOLUTE_PATH GARRYSMOD_COMMON_PATH NORMALIZE)
 
-    if(NOT IS_DIRECTORY ${GARRYSMOD_COMMON_PATH} OR NOT EXISTS ${GARRYSMOD_COMMON_PATH}/CMakeLists.txt OR ${GARRYSMOD_COMMON_PATH} STREQUAL ${CMAKE_CURRENT_LIST_DIR})
-        message(FATAL_ERROR "Invalid path to garrysmod_common. Please set valid GARRYSMOD_COMMON_PATH")
-    endif()
-
-    add_subdirectory(${GARRYSMOD_COMMON_PATH} ${CMAKE_BINARY_DIR}/garrysmod_common)
-endfunction()
-```
-And then include garrysmod_common just by calling `find_garrysmod_common` function:
-```cmake
-# this function will throw an error if garrysmod_common wasn't found
-find_garrysmod_common()
-if(NOT GARRYSMOD_COMMON_FOUND) # Check if garrysmod_common has been found
-    message(FATAL_ERROR "garrysmod_common not found")
+if(NOT IS_DIRECTORY ${GARRYSMOD_COMMON_PATH} OR NOT EXISTS ${GARRYSMOD_COMMON_PATH}/CMakeLists.txt OR ${GARRYSMOD_COMMON_PATH} STREQUAL ${CMAKE_CURRENT_LIST_DIR})
+    message(FATAL_ERROR "Invalid path to garrysmod_common. Please set valid GARRYSMOD_COMMON_PATH")
 endif()
 
-# define your project below
-project(...)
+add_subdirectory(${GARRYSMOD_COMMON_PATH} ${CMAKE_BINARY_DIR}/garrysmod_common)
+set(GarrysmodCommon_FOUND TRUE)
+```
+And then include garrysmod_common just by calling `find_package` function:
+```cmake
+# let cmake find FindGarrysmodCommon.cmake file, and use it in find_package
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+find_package(GarrysmodCommon REQUIRED)
 ```
 
 ## Libraries (targets)
