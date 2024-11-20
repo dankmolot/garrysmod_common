@@ -1,7 +1,11 @@
-function(find_detouring)
-    message(STATUS "Searching for Detouring...")
+message(STATUS "Looking for garrysmod_common/detouring...")
 
-    set(DETOURING_PATH "./detouring" CACHE PATH "Path to detouring relative to garrysmod_common")
+set(Detouring_DIR "./detouring" CACHE PATH "Path to detouring relative to garrysmod_common")
+cmake_path(ABSOLUTE_PATH Detouring_DIR NORMALIZE)
 
-    add_subdirectory(${DETOURING_PATH} ${CMAKE_CURRENT_BINARY_DIR}/detouring)
-endfunction()
+if (NOT IS_DIRECTORY ${Detouring_DIR} AND NOT EXISTS ${Detouring_DIR}/CMakeLists.txt)
+    message(FATAL_ERROR "detouring not found")
+endif()
+
+add_subdirectory(${Detouring_DIR} ${CMAKE_CURRENT_BINARY_DIR}/detouring)
+set(Detouring_FOUND TRUE)
